@@ -116,3 +116,55 @@ GROUP BY customer_id
 ORDER BY SUM(amount) DESC
 LIMIT 5;
 ```
+
+## Q: We are launching a platinum service for our most loyal customers. We will assign platinum status to customers that have had 40 or more transaction payments. What customer_ids are eligible for platinum status?
+Answer:
+```
+SELECT customer_id, COUNT(amount) FROM payment
+GROUP BY customer_id
+HAVING COUNT(amount) >= 40;
+```
+
+## Q: What are the customer ids of customers who have spent more than $100 in payment transactions with our staff_id member 2?
+Answer:
+```
+SELECT customer_id, staff_id, SUM(amount) FROM payment
+GROUP BY staff_id, customer_id
+HAVING  SUM(amount) > 100 AND staff_id = 2;
+```
+
+but, a better solution could be this:
+
+```
+SELECT customer_id, SUM(amount) FROM payment
+WHERE staff_id = 2
+GROUP BY customer_id
+HAVING SUM(amount) > 100;
+```
+
+# Assesment Test 1
+## Q: Return the customer IDs of customers who have spent at least $110 with the staff member who has an ID of 2
+Answer:
+```
+SELECT customer_id, SUM(amount) FROM payment
+WHERE staff_id = 2
+GROUP BY customer_id
+HAVING SUM(amount) > 110;
+```
+
+## Q: How many films begin with the letter J?
+Answer:
+```
+SELECT COUNT(*) FROM film
+WHERE title ILIKE 'J%';
+```
+
+## Q: What customer has the highest customer ID number whose name starts with an 'E' and has an address ID lower than 500?
+Answer:
+```
+SELECT first_name, last_name FROM customer
+WHERE first_name ILIKE 'E%' AND address_id < 500 
+ORDER BY customer_id DESC
+LIMIT 1;
+```
+
