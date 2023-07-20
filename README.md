@@ -168,3 +168,25 @@ ORDER BY customer_id DESC
 LIMIT 1;
 ```
 
+## Q: California sales tax laws have changed and we need to alert our customers to this through email. What are the emials of customers who live in California?
+Answer:
+```
+SELECT customer.email,district FROM address
+INNER JOIN customer
+ON customer.address_id = address.address_id
+WHERE district = 'California'
+```
+
+## Q: A customer walks in and is a huge fan of the actor "Nick Wahlberg" and wants to know which movies he is in. Get a list of all the movies "Nick Wahlberg" has been in.
+Answer:
+```
+SELECT title FROM film
+INNER JOIN film_actor
+ON film.film_id = film_actor.film_id
+WHERE actor_id = 2
+```
+In this case, Nick Wahlberg's id was assigned to 2. I believe that I should select the id first (since actor id could be change in time), but I do not know how to do multiple querying and storing as a variable to use it later. So, it is a bit dirty code imho.
+
+PS: I learnt that actor_id could be retrieved using a second inner join, but I think there could be some other way to do it. Using a second inner join could overload the system , and that situation is not very welcomed imo.
+
+
