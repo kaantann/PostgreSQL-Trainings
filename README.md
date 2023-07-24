@@ -189,4 +189,18 @@ In this case, Nick Wahlberg's id was assigned to 2. I believe that I should sele
 
 PS: I learnt that actor_id could be retrieved using a second inner join, but I think there could be some other way to do it. Using a second inner join could overload the system , and that situation is not very welcomed imo.
 
+## Q: During which months did payments occur? Format your answer to return back the full month name.
+Answer:
+```
+SELECT DISTINCT(TO_CHAR(payment_date,'MONTH'))
+FROM payment;
+```
 
+## Q: How many payments occured on Monday?
+Answer:
+```
+SELECT COUNT(*) FROM payment
+WHERE EXTRACT(dow FROM payment_date) = 1;
+```
+
+## Q:
