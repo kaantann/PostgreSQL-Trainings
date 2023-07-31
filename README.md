@@ -203,4 +203,50 @@ SELECT COUNT(*) FROM payment
 WHERE EXTRACT(dow FROM payment_date) = 1;
 ```
 
-## Q:
+## Q: How can you retrieve all the information from the cd.facilities table?
+Answer:
+```
+SELECT * FROM cd.facilities;
+```
+
+## Q: You want to print out a list of all of the facilities and their cost to members. How would you retrieve a list of only facility names and costs?
+Answer:
+```
+SELECT name,membercost FROM cd.facilities;
+```
+
+## Q: How can you produce a list of facilities that charge a fee to members?
+Answer:
+```
+SELECT * FROM cd.facilities
+WHERE membercost != 0;
+```
+
+## Q: How can you produce a list of facilities that charge a fee to members, and that fee is less than 1/50th of the monthly maintenance cost? Return the facid, facility name, member cost, and monthly maintenance of the facilities in question.
+Answer:
+```
+SELECT facid, name, membercost,monthlymaintenance FROM cd.facilities
+WHERE membercost != 0 AND membercost < monthlymaintenance / 50;
+```
+
+## Q: How can you produce a list of all facilities with the word 'Tennis' in their name?
+Answer:
+```
+SELECT * FROM cd.facilities
+WHERE name LIKE '%Tennis%';
+```
+
+## Q: How can you retrieve the details of facilities with ID 1 and 5? Try to do it without using the OR operator.
+Answer:
+```
+SELECT * FROM cd.facilities
+WHERE MOD(facid,4) = 1
+```
+
+PS: I did not understand the reasoning why we do not use OR operator. Since I got the right solution, I won't change it for now. However, after checking the solutions, may be I get purpose of the question.
+
+## Q: How can you produce a list of members who joined after the start of September 2012? Return the memid, surname, firstname, and joindate of the members in question.
+Answer:
+```
+
+```
